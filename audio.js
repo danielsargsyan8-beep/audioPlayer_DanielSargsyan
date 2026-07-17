@@ -11,9 +11,9 @@ var data = {
 
  song: [
     "music/Armani_White_-_Billie-Eilish_Official_Video_(mp3.pm).mp3",
-    "music/Tatoul Avoyan (Tatul) - Srti banali.",
-    "musyc/Shakira_-_Waka_Waka_Original_(mp3.pm).",
-    "music/Mamba_-_Otido_(www.mexedi.am)",
+    "music/Tatoul Avoyan (Tatul) - Srti banali.mp3",
+    "music/Shakira_-_Waka_Waka_Original_(mp3.pm).mp3",
+    "music/Mamba_-_Otido_(www.mexedi.am).mp3",
     "music/Slash Inferno.mp3"
 ],
 poster : [
@@ -30,17 +30,22 @@ let currentSong = 0
 window.onload = function (){
 playSong()
 }
-function playSong (){
-  song.src = data.song[currentSong]
-  let songTitle = document.getElementById("songTitle")
-  songTitle.textContent = data.title[currentSong]
-  let img = document.getElementById("row1")
-  img.style.backgroundImage = "url ("+ data.poster[currentSong]+")"
-  let main = document.getElementById("main")
-  main.style.backgroundImage =  "url ("+ data.poster[currentSong]+")"
-  song.play()
-}
 
+
+function playSong() {
+    song.src = data.song[currentSong]
+    let songTitle = document.getElementById("songTitle")
+    
+    songTitle.textContent = data.title[currentSong]
+    
+    let img = document.getElementsByClassName("row1")
+    img[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")";
+    console.log(img[0]);
+    
+    let main = document.getElementsByClassName("main")
+    main[0].style.backgroundImage = "url(" + data.poster[currentSong] + ")";
+    song.play()
+    }
 function playOrPauseSong(){
 
 
@@ -92,13 +97,18 @@ min = (min < 10) ? "0" + min : min
 }
 
 
-function next (){
-currentSong++
-if (currentSong >= data.song.length){
-      currentSong = 0
-}
-play.Song()
-play.src = "images/pause.png"
+
+function next() {
+    currentSong++;
+
+    if (currentSong >= data.song.length) {
+        currentSong = 0;
+    }
+
+    playSong();
+
+    let play = document.getElementById("play");
+    play.src = "images/pause.png";
 }
 
 
@@ -122,3 +132,21 @@ play.src = "images/pause.png"
 
        }
  }
+
+
+ function increase (){
+    let mute = document.getElementById("mute")
+    song.volume += 0.2
+    if(song.volume >= 0.1) {
+        mute.src = "images/volume.png"
+    }
+}
+
+function decrease (){
+    let mute = document.getElementById("mute")
+    song.volume -= 0.2
+ 
+    if(song.volume <= 0.1) {
+        mute.src = "images/volume-mute.png"
+    }
+}
